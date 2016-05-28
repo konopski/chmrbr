@@ -1,9 +1,8 @@
 import requests
 
-GITLAB_URL="http://gitlab/"
-API_URL= GITLAB_URL + "api/v3/projects/" 
+execfile('config.py')
 
-PRIVATE_TOKEN="mysecret"
+API_URL= GITLAB_URL + "api/v3/projects/" 
 
 project_name = "myproject"
 mr_id_from_gui = "1024"
