@@ -1,15 +1,22 @@
 import requests
+import argparse 
 
 execfile('config.py')
 
 API_URL= GITLAB_URL + "api/v3/projects/" 
 
-project_name = "myproject"
-mr_id_from_gui = "1024"
-target_branch = "develop"
-verbose = True
-
 PRIV_TOKEN_PARAM = { "private_token": PRIVATE_TOKEN }
+
+parser = argparse.ArgumentParser() 
+parser.add_argument("-p", "--project_name", dest="project_name", help="gitlab project name", type=str, required=True)
+parser.add_argument("-id", "--id", dest="mr_id", help="MR id visible in gitlab", type=int, required=True)
+parser.add_argument("-t", "--target_branch", dest="target_branch", help="new target branch", type=str, required=True)
+parser.add_argument("-v", "--verbose", dest="verbose", help="display information", type=bool, required=False, default=False)
+args = parser.parse_args()
+project_name = args.project_name
+mr_id_from_gui = str(args.mr_id)
+target_branch = args.target_branch
+verbose = args.verbose
 
 s = requests.Session()
 
